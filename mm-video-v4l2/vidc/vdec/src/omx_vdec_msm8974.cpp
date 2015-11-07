@@ -9291,12 +9291,12 @@ void omx_vdec::handle_extradata(OMX_BUFFERHEADERTYPE *p_buf_hdr)
                         p_extra = (OMX_OTHER_EXTRADATATYPE *) (((OMX_U8 *) p_extra) + p_extra->nSize);
                     }
                     break;
-                case MSM_VIDC_EXTRADATA_VUI_DISPLAY_INFO:
+                /*case MSM_VIDC_EXTRADATA_VUI_DISPLAY_INFO:
                     struct msm_vidc_vui_display_info_payload *display_info_payload;
                     display_info_payload = (struct msm_vidc_vui_display_info_payload*)(void *)data->data;
 
                     if (client_extradata & OMX_VUI_DISPLAY_INFO_EXTRADATA) {
-                        /* This extradata usually isn't needed by clients. Leave it unimplemented for now */
+                        /* This extradata usually isn't needed by clients. Leave it unimplemented for now 
                         DEBUG_PRINT_ERROR("VUI display info not propagated to client");
                     }
 
@@ -9317,7 +9317,7 @@ void omx_vdec::handle_extradata(OMX_BUFFERHEADERTYPE *p_buf_hdr)
                         setMetaData((private_handle_t *)native_buffer[buf_index].privatehandle,
                                UPDATE_COLOR_SPACE, (void*)&color_space);
                     }
-                    break;
+                    break;*/
                 default:
                     DEBUG_PRINT_LOW("Unrecognized extradata");
                     goto unrecognized_extradata;
@@ -9461,13 +9461,13 @@ OMX_ERRORTYPE omx_vdec::enable_extradata(OMX_U32 requested_extradata,
                 DEBUG_PRINT_HIGH("Seq display extradata is supported for MPEG2 only");
             }
         }
-        if (requested_extradata & OMX_VUI_DISPLAY_INFO_EXTRADATA) {
+        /*if (requested_extradata & OMX_VUI_DISPLAY_INFO_EXTRADATA) {
             control.id = V4L2_CID_MPEG_VIDC_VIDEO_EXTRADATA;
             control.value = V4L2_MPEG_VIDC_EXTRADATA_VUI_DISPLAY;
             if (ioctl(drv_ctx.video_driver_fd, VIDIOC_S_CTRL, &control)) {
                 DEBUG_PRINT_HIGH("Failed to set display VUI extradata");
             }
-        }
+        }*/
     }
     ret = get_buffer_req(&drv_ctx.op_buf);
     return ret;
